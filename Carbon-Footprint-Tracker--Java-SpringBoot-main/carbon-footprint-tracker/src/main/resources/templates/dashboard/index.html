@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Carbon Footprint Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-leaf me-2"></i>Carbon Tracker
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/footprint">Carbon Footprint</a>
+                <a class="nav-link" href="/goals">Goals</a>
+                <a class="nav-link" href="/reports">Reports</a>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user me-1"></i>
+                        <span sec:authentication="principal.fullName">User</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form th:action="@{/logout}" method="post" class="d-inline">
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">
+                    <i class="fas fa-tachometer-alt text-success me-2"></i>
+                    Welcome back, <span sec:authentication="principal.fullName">User</span>!
+                </h1>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="card-title">This Month</h6>
+                                <h3 class="mb-0" th:text="${#numbers.formatDecimal(monthlyEmissions, 1, 2)} + ' kg CO₂'">0 kg CO₂</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-calendar-month fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="card-title">Daily Average</h6>
+                                <h3 class="mb-0" th:text="${#numbers.formatDecimal(averageEmissions, 1, 2)} + ' kg CO₂'">0 kg CO₂</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-chart-line fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="card-title">This Year</h6>
+                                <h3 class="mb-0" th:text="${#numbers.formatDecimal(yearlyEmissions, 1, 2)} + ' kg CO₂'">0 kg CO₂</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-calendar-year fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card bg-secondary text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="card-title">Active Goals</h6>
+                                <h3 class="mb-0" th:text="${#lists.size(activeGoals)}">0</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-bullseye fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Recent Entries -->
+            <div class="col-lg-8 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-history me-2"></i>Recent Carbon Footprint Entries</h5>
+                        <a href="/footprint/add" class="btn btn-success btn-sm">
+                            <i class="fas fa-plus me-1"></i>Add Entry
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${#lists.isEmpty(recentFootprints)}" class="text-center text-muted py-4">
+                            <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                            <p>No carbon footprint entries yet. <a href="/footprint/add">Add your first entry</a> to get started!</p>
+                        </div>
+                        
+                        <div th:if="${!#lists.isEmpty(recentFootprints)}" class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Total Emissions</th>
+                                        <th>Primary Source</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="footprint : ${recentFootprints}">
+                                        <td th:text="${#temporals.format(footprint.date, 'MMM dd, yyyy')}"></td>
+                                        <td>
+                                            <span class="badge bg-primary" th:text="${#numbers.formatDecimal(footprint.totalEmissions, 1, 2)} + ' kg CO₂'"></span>
+                                        </td>
+                                        <td>
+                                            <span th:if="${footprint.electricityUsage > footprint.carDistance and footprint.electricityUsage > footprint.flightDistance}">Electricity</span>
+                                            <span th:if="${footprint.carDistance > footprint.electricityUsage and footprint.carDistance > footprint.flightDistance}">Transportation</span>
+                                            <span th:if="${footprint.flightDistance > footprint.electricityUsage and footprint.flightDistance > footprint.carDistance}">Flights</span>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/footprint/view/{id}(id=${footprint.id})}" class="btn btn-sm btn-outline-primary">View</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="text-center mt-3" th:if="${!#lists.isEmpty(recentFootprints)}">
+                            <a href="/footprint" class="btn btn-outline-success">View All Entries</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goals Progress -->
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-bullseye me-2"></i>Active Goals</h5>
+                        <a href="/goals/add" class="btn btn-success btn-sm">
+                            <i class="fas fa-plus me-1"></i>New Goal
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${#lists.isEmpty(activeGoals)}" class="text-center text-muted py-4">
+                            <i class="fas fa-target fa-3x mb-3"></i>
+                            <p>No active goals. <a href="/goals/add">Set your first goal</a> to start reducing your carbon footprint!</p>
+                        </div>
+                        
+                        <div th:if="${!#lists.isEmpty(activeGoals)}">
+                            <div th:each="goal : ${activeGoals}" class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0" th:text="${goal.title}">Goal Title</h6>
+                                    <small class="text-muted" th:text="${#numbers.formatDecimal(goal.progressPercentage, 1, 0)} + '%'">0%</small>
+                                </div>
+                                <div class="progress mb-1" style="height: 8px;">
+                                    <div class="progress-bar bg-success" 
+                                         th:style="'width: ' + ${goal.progressPercentage} + '%'"></div>
+                                </div>
+                                <small class="text-muted">
+                                    <span th:text="${#numbers.formatDecimal(goal.currentReduction, 1, 1)}">0</span> / 
+                                    <span th:text="${#numbers.formatDecimal(goal.targetReduction, 1, 1)}">0</span> kg CO₂
+                                </small>
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="/goals" class="btn btn-outline-success btn-sm">View All Goals</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3">
+                                <a href="/footprint/add" class="btn btn-outline-success btn-lg w-100">
+                                    <i class="fas fa-plus-circle fa-2x d-block mb-2"></i>
+                                    Add Today's Data
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="/goals/add" class="btn btn-outline-info btn-lg w-100">
+                                    <i class="fas fa-target fa-2x d-block mb-2"></i>
+                                    Set New Goal
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="/reports" class="btn btn-outline-warning btn-lg w-100">
+                                    <i class="fas fa-chart-bar fa-2x d-block mb-2"></i>
+                                    View Reports
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="/footprint" class="btn btn-outline-secondary btn-lg w-100">
+                                    <i class="fas fa-history fa-2x d-block mb-2"></i>
+                                    View History
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

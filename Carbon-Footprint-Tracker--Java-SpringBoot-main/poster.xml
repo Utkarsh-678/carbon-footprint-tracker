@@ -1,0 +1,157 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.6">
+  <diagram name="Carbon Footprint Tracker Architecture" id="carbon-tracker-arch">
+    <mxGraphModel dx="1476" dy="817" grid="1" gridSize="20" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="header-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c3e50;strokeColor=#1a252f;fontColor=#ffffff;fontSize=16;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="16" y="12" width="1624" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="project-title" value="🌱 Carbon Footprint Tracker" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=50;fontStyle=1;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="458" y="40" width="740" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="&lt;b&gt;Sustainable Living Through Smart Technology&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#ecf0f1;" parent="1" vertex="1">
+          <mxGeometry x="600" y="92" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="team-info" value="&lt;b&gt;&lt;font style=&quot;font-size: 22px;&quot;&gt;👥 T07&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#bdc3c7;" parent="1" vertex="1">
+          <mxGeometry x="60" y="40" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mentor-info" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;&lt;b&gt;👨‍🏫 Mentor:&amp;nbsp;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;&lt;b&gt;Dr. Swaminathan J.&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#bdc3c7;" parent="1" vertex="1">
+          <mxGeometry x="1420" y="80" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="abstract" value="&lt;font&gt;&lt;strong style=&quot;&quot;&gt;Abstract:&lt;/strong&gt;&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font&gt;A comprehensive web application that enables users to track, monitor, and reduce their carbon footprint through intuitive data visualization, personalized goal setting, and intelligent recommendations for sustainable living. The application features real-time emissions calculations across multiple categories including energy consumption, transportation, and waste management, providing users with detailed analytics and progress tracking capabilities. Built with a modern Spring Boot backend and Angular frontend, the platform offers secure user authentication, comprehensive reporting with weekly, monthly, and yearly trends, and actionable insights to help individuals make informed decisions toward achieving their environmental sustainability goals.&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=14;fontColor=#ffffff;spacingLeft=10;spacingRight=10;spacingTop=5;spacingBottom=5;" parent="1" vertex="1">
+          <mxGeometry x="140" y="112" width="1280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="security-badge" value="🔒 Spring Security" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e74c3c;strokeColor=#c0392b;fontColor=#ffffff;fontSize=12;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1460" y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="presentation-layer" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;🖥️ Presentation Layer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c3e50;strokeColor=#1a252f;fontColor=#ffffff;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="260" width="280" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="landing-page" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Landing Page&lt;br&gt;&lt;/b&gt;&lt;/font&gt;• Home&lt;br&gt;• Features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9b59b6;strokeColor=#7d3c98;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="80" y="315" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-pages" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Authentication&lt;/b&gt;&lt;/font&gt;&lt;br&gt;• Login&lt;br&gt;• Register" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9b59b6;strokeColor=#7d3c98;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="80" y="390" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dashboard-page" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Dashboard&lt;/b&gt;&lt;/font&gt;&lt;br&gt;• Overview&lt;br&gt;• Statistics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9b59b6;strokeColor=#7d3c98;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="80" y="460" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tracking-pages" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Carbon Tracking&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• Add Entry&lt;br&gt;• Edit/View" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9b59b6;strokeColor=#7d3c98;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="80" y="535" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="goals-reports" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Goals &amp;amp; Reports&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• Goal Setting&lt;br&gt;• Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9b59b6;strokeColor=#7d3c98;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="80" y="610" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="controller-layer" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;🎮 Controller Layer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c3e50;strokeColor=#1a252f;fontColor=#ffffff;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="380" y="260" width="280" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="home-controller" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;HomeController&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• home()&lt;br&gt;• login()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498db;strokeColor=#2471a3;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="310" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-controller" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;AuthController&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• register()&lt;br&gt;• authenticate()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498db;strokeColor=#2471a3;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="380" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dashboard-controller" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;DashboardController&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• dashboard()&lt;br&gt;• getStats()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498db;strokeColor=#2471a3;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="450" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="footprint-controller" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;CarbonFootprintController&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• addFootprint()&lt;br&gt;• editFootprint()&lt;br&gt;• viewFootprint()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498db;strokeColor=#2471a3;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="520" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="goal-controller" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;ReductionGoalController&lt;/b&gt;&lt;/font&gt;&lt;br&gt;• addGoal()&lt;br&gt;• editGoal()&lt;br&gt;• toggleStatus()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498db;strokeColor=#2471a3;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="610" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="reports-controller" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;ReportsController&lt;br&gt;&lt;/b&gt;&lt;/font&gt;• generateReports()&lt;br&gt;• exportData()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498db;strokeColor=#2471a3;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="700" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="service-layer" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;⚙️ Service Layer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c3e50;strokeColor=#1a252f;fontColor=#ffffff;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="700" y="260" width="280" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="user-service" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;UserService&lt;/font&gt;&lt;/b&gt;&lt;br&gt;• registerUser()&lt;br&gt;• loadUserByUsername()&lt;br&gt;• updateUser()&lt;br&gt;• createDefaultAdmin()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e67e22;strokeColor=#ba4a00;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="720" y="320" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="footprint-service" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;CarbonFootprintService&lt;/b&gt;&lt;/font&gt;&lt;br&gt;• saveCarbonFootprint()&lt;br&gt;• calculateEmissions()&lt;br&gt;• getRecommendations()&lt;br&gt;• getMonthlyEmissions()&lt;br&gt;• getAverageEmissions()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e67e22;strokeColor=#ba4a00;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="720" y="425" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="goal-service" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;ReductionGoalService&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• saveGoal()&lt;br&gt;• getActiveGoals()&lt;br&gt;• updateProgress()&lt;br&gt;• getOverdueGoals()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e67e22;strokeColor=#ba4a00;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="720" y="550" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="repository-layer" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;🗂️ Repository Layer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c3e50;strokeColor=#1a252f;fontColor=#ffffff;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="1020" y="260" width="280" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="user-repository" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;UserRepository&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• findByUsername()&lt;br&gt;• findByEmail()&lt;br&gt;• existsByUsername()&lt;br&gt;• existsByEmail()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1abc9c;strokeColor=#138d75;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="320" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="footprint-repository" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;CarbonFootprintRepository&lt;/font&gt;&lt;/b&gt;&lt;br&gt;• findByUserOrderByDateDesc()&lt;br&gt;• findByUserAndDate()&lt;br&gt;• sumEmissionsByUser()&lt;br&gt;• averageEmissionsByUser()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1abc9c;strokeColor=#138d75;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="435" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="goal-repository" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;ReductionGoalRepository&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• findByUserAndStatus()&lt;br&gt;• findByTargetDateBefore()&lt;br&gt;• findByUserOrderByCreatedAt()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1abc9c;strokeColor=#138d75;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="555" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="model-layer" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;📊 Model Entities&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2c3e50;strokeColor=#1a252f;fontColor=#ffffff;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="1340" y="260" width="280" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="user-model" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;User&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• id, username&lt;br&gt;• email, password&lt;br&gt;• fullName, role&lt;br&gt;• enabled" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#27ae60;strokeColor=#1e8449;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="310" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="footprint-model" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;CarbonFootprint&lt;/font&gt;&lt;/b&gt;&lt;br&gt;• id, date&lt;br&gt;• electricityUsage, gasUsage&lt;br&gt;• carDistance, flightDistance&lt;br&gt;• wasteProduced, recyclingAmount&lt;br&gt;• totalEmissions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#27ae60;strokeColor=#1e8449;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="410" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="goal-model" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;ReductionGoal&lt;br&gt;&lt;/font&gt;&lt;/b&gt;• id, title, description&lt;br&gt;• targetReduction&lt;br&gt;• currentReduction&lt;br&gt;• targetDate, status&lt;br&gt;• progressPercentage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#27ae60;strokeColor=#1e8449;fontColor=#ffffff;fontSize=11;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="520" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="database" value="🗄️&lt;br&gt;PostgresSQL&lt;br&gt;Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1485" y="640" width="90" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="crud-ops" value="🔄 JPA/Hibernate&#xa;CRUD Operations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="660" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="http-section" value="📡 HTTP/HTTPS&#xa;RESTful APIs&#xa;Request/Response" style="ellipse;whiteSpace=wrap;html=1;fillColor=#95a5a6;strokeColor=#34495e;fontColor=#ffffff;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="760" y="700" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="api-endpoints" value="🌐 API Endpoints:&#xa;/dashboard&#xa;/footprint/*&#xa;/goals/*&#xa;/reports&#xa;/auth/*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="960" y="700" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="config-section" value="🔧 Configuration:&#xa;SecurityConfig&#xa;WebConfig&#xa;PasswordConfig&#xa;SecurityUtils" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="700" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="features" value="✨ Key Features: Real-time Carbon Tracking | Smart Goal Setting | Data Visualization | Personalized Recommendations | Progress Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2ecc71;strokeColor=#27ae60;fontColor=#ffffff;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="850" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-spring" value="🍃 Spring Boot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="827" y="850" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-security" value="🔒 Spring Security" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="967" y="850" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-jpa" value="📊 JPA/Hibernate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1127" y="850" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-thymeleaf" value="🎨 Thymeleaf" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1287" y="850" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-bootstrap" value="💎 Bootstrap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34495e;strokeColor=#1a252f;fontColor=#ffffff;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1427" y="850" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" value="" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;fillColor=#e74c3c;strokeColor=#c0392b;" parent="1" vertex="1">
+          <mxGeometry x="340" y="500" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;fillColor=#e74c3c;strokeColor=#c0392b;" parent="1" vertex="1">
+          <mxGeometry x="660" y="500" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;fillColor=#e74c3c;strokeColor=#c0392b;" parent="1" vertex="1">
+          <mxGeometry x="980" y="500" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" value="" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;fillColor=#e74c3c;strokeColor=#c0392b;" parent="1" vertex="1">
+          <mxGeometry x="1300" y="500" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="db-arrow" value="" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;fillColor=#e74c3c;strokeColor=#c0392b;" parent="1" vertex="1">
+          <mxGeometry x="1520" y="620" width="20" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="esq7femGUjq_v09OW7SF-1" value="&lt;b&gt;&lt;font style=&quot;font-size: 22px;&quot;&gt;Riya Jaiswal&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#bdc3c7;" vertex="1" parent="1">
+          <mxGeometry x="60" y="72" width="140" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

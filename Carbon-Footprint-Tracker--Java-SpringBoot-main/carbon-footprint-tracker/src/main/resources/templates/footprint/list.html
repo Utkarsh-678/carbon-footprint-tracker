@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint History</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-leaf me-2"></i>Carbon Tracker
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link active" href="/footprint">Carbon Footprint</a>
+                <a class="nav-link" href="/goals">Goals</a>
+                <a class="nav-link" href="/reports">Reports</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1><i class="fas fa-chart-line text-success me-2"></i>Carbon Footprint History</h1>
+                    <a href="/footprint/add" class="btn btn-success">
+                        <i class="fas fa-plus me-2"></i>Add New Entry
+                    </a>
+                </div>
+
+                <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show">
+                    <span th:text="${successMessage}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div th:if="${#lists.isEmpty(footprints)}" class="text-center py-5">
+                            <i class="fas fa-clipboard-list fa-4x text-muted mb-3"></i>
+                            <h4 class="text-muted">No Carbon Footprint Entries Yet</h4>
+                            <p class="text-muted">Start tracking your environmental impact by adding your first entry.</p>
+                            <a href="/footprint/add" class="btn btn-success btn-lg">
+                                <i class="fas fa-plus me-2"></i>Add Your First Entry
+                            </a>
+                        </div>
+
+                        <div th:if="${!#lists.isEmpty(footprints)}">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-success">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Electricity (kWh)</th>
+                                            <th>Gas (m³)</th>
+                                            <th>Car (km)</th>
+                                            <th>Public Transport (km)</th>
+                                            <th>Flights (km)</th>
+                                            <th>Waste (kg)</th>
+                                            <th>Recycling (kg)</th>
+                                            <th>Total Emissions</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="footprint : ${footprints}">
+                                            <td th:text="${#temporals.format(footprint.date, 'MMM dd, yyyy')}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.electricityUsage, 1, 2)}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.gasUsage, 1, 2)}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.carDistance, 1, 2)}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.publicTransportDistance, 1, 2)}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.flightDistance, 1, 2)}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.wasteProduced, 1, 2)}"></td>
+                                            <td th:text="${#numbers.formatDecimal(footprint.recyclingAmount, 1, 2)}"></td>
+                                            <td>
+                                                <span class="badge bg-primary" th:text="${#numbers.formatDecimal(footprint.totalEmissions, 1, 2)} + ' kg CO₂'"></span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a th:href="@{/footprint/view/{id}(id=${footprint.id})}" 
+                                                       class="btn btn-sm btn-outline-info" title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a th:href="@{/footprint/edit/{id}(id=${footprint.id})}" 
+                                                       class="btn btn-sm btn-outline-warning" title="Edit">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" 
+                                                            title="Delete" 
+                                                            th:onclick="'confirmDelete(' + ${footprint.id} + ')'">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this carbon footprint entry? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deleteForm" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const form = document.getElementById('deleteForm');
+            form.action = '/footprint/delete/' + id;
+            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            modal.show();
+        }
+    </script>
+</body>
+</html>

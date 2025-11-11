@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reduction Goals</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-leaf me-2"></i>Carbon Tracker
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/footprint">Carbon Footprint</a>
+                <a class="nav-link active" href="/goals">Goals</a>
+                <a class="nav-link" href="/reports">Reports</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1><i class="fas fa-bullseye text-success me-2"></i>Reduction Goals</h1>
+                    <a href="/goals/add" class="btn btn-success">
+                        <i class="fas fa-plus me-2"></i>Add New Goal
+                    </a>
+                </div>
+
+                <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show">
+                    <span th:text="${successMessage}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <div th:if="${#lists.isEmpty(goals)}" class="text-center py-5">
+                    <i class="fas fa-target fa-4x text-muted mb-3"></i>
+                    <h4 class="text-muted">No Reduction Goals Set</h4>
+                    <p class="text-muted">Set your first goal to start reducing your carbon footprint systematically.</p>
+                    <a href="/goals/add" class="btn btn-success btn-lg">
+                        <i class="fas fa-plus me-2"></i>Set Your First Goal
+                    </a>
+                </div>
+
+                <div th:if="${!#lists.isEmpty(goals)}" class="row">
+                    <div th:each="goal : ${goals}" class="col-lg-6 col-xl-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0" th:text="${goal.title}">Goal Title</h6>
+                                <span class="badge" 
+                                      th:classappend="${goal.status.name() == 'ACTIVE'} ? 'bg-success' : (${goal.status.name() == 'COMPLETED'} ? 'bg-primary' : 'bg-secondary')"
+                                      th:text="${goal.status}">Status</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text" th:text="${goal.description}">Description</p>
+                                
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <small class="text-muted">Progress</small>
+                                        <small class="text-muted" th:text="${#numbers.formatDecimal(goal.progressPercentage, 1, 0)} + '%'">0%</small>
+                                    </div>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar" 
+                                             th:classappend="${goal.status.name() == 'COMPLETED'} ? 'bg-success' : 'bg-info'"
+                                             th:style="'width: ' + ${goal.progressPercentage} + '%'"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">
+                                            Current: <span th:text="${#numbers.formatDecimal(goal.currentReduction, 1, 1)}">0</span> kg CO₂
+                                        </small>
+                                        <small class="text-muted">
+                                            Target: <span th:text="${#numbers.formatDecimal(goal.targetReduction, 1, 1)}">0</span> kg CO₂
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar me-1"></i>
+                                        Target Date: <span th:text="${#temporals.format(goal.targetDate, 'MMM dd, yyyy')}">Date</span>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <div class="btn-group w-100" role="group">
+                                    <a th:href="@{/goals/edit/{id}(id=${goal.id})}" 
+                                       class="btn btn-outline-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <button type="button" 
+                                            th:if="${goal.status.name() != 'COMPLETED'}"
+                                            class="btn btn-outline-info btn-sm"
+                                            th:onclick="'toggleStatus(' + ${goal.id} + ')'">
+                                        <i class="fas fa-pause" th:if="${goal.status.name() == 'ACTIVE'}"></i>
+                                        <i class="fas fa-play" th:if="${goal.status.name() == 'PAUSED'}"></i>
+                                        <span th:text="${goal.status.name() == 'ACTIVE'} ? 'Pause' : 'Resume'">Toggle</span>
+                                    </button>
+                                    <button type="button" 
+                                            class="btn btn-outline-danger btn-sm"
+                                            th:onclick="'confirmDelete(' + ${goal.id} + ')'">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this goal? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deleteForm" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const form = document.getElementById('deleteForm');
+            form.action = '/goals/delete/' + id;
+            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            modal.show();
+        }
+
+        function toggleStatus(id) {
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = '/goals/toggle-status/' + id;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+</html>

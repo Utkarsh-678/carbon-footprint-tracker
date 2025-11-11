@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEdit} ? 'Edit Goal' : 'Add New Goal'">Add New Goal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/"><i class="fas fa-leaf me-2"></i>Carbon Tracker</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/goals">Goals</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <i class="fas fa-bullseye me-2"></i>
+                            <span th:text="${isEdit} ? 'Edit Reduction Goal' : 'Create New Reduction Goal'">Create New Reduction Goal</span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="${isEdit} ? @{/goals/edit/{id}(id=${goal.id})} : @{/goals/add}" 
+                              th:object="${goal}" method="post">
+                            
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label for="title" class="form-label">Goal Title *</label>
+                                    <input type="text" class="form-control" th:field="*{title}" required 
+                                           placeholder="e.g., Reduce electricity consumption by 20%">
+                                    <div th:if="${#fields.hasErrors('title')}" class="text-danger small" th:errors="*{title}"></div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" th:field="*{description}" rows="3" 
+                                              placeholder="Describe your goal and how you plan to achieve it..."></textarea>
+                                    <div th:if="${#fields.hasErrors('description')}" class="text-danger small" th:errors="*{description}"></div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="targetReduction" class="form-label">Target Reduction (kg CO₂) *</label>
+                                    <input type="number" step="0.1" class="form-control" th:field="*{targetReduction}" required 
+                                           placeholder="e.g., 50.0">
+                                    <div th:if="${#fields.hasErrors('targetReduction')}" class="text-danger small" th:errors="*{targetReduction}"></div>
+                                    <small class="form-text text-muted">How much CO₂ do you want to reduce?</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="targetDate" class="form-label">Target Date *</label>
+                                    <input type="date" class="form-control" th:field="*{targetDate}" required>
+                                    <div th:if="${#fields.hasErrors('targetDate')}" class="text-danger small" th:errors="*{targetDate}"></div>
+                                    <small class="form-text text-muted">When do you want to achieve this goal?</small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success me-2">
+                                        <i class="fas fa-save me-2"></i>
+                                        <span th:text="${isEdit} ? 'Update Goal' : 'Create Goal'">Create Goal</span>
+                                    </button>
+                                    <a href="/goals" class="btn btn-secondary">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Goal Ideas Card -->
+                <div class="card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Goal Ideas</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-success">Energy Goals</h6>
+                                <ul class="list-unstyled small">
+                                    <li>• Reduce electricity usage by 15%</li>
+                                    <li>• Switch to LED bulbs (save ~30 kg CO₂/year)</li>
+                                    <li>• Unplug devices when not in use</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-warning">Transport Goals</h6>
+                                <ul class="list-unstyled small">
+                                    <li>• Walk/bike for trips under 5km</li>
+                                    <li>• Use public transport 3 days/week</li>
+                                    <li>• Reduce car travel by 100km/month</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

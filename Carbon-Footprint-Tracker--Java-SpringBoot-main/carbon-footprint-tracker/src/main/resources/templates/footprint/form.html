@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEdit} ? 'Edit Carbon Footprint' : 'Add Carbon Footprint'">Add Carbon Footprint</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-leaf me-2"></i>Carbon Tracker
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/footprint">Carbon Footprint</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            <span th:text="${isEdit} ? 'Edit Carbon Footprint Entry' : 'Add Carbon Footprint Entry'">Add Carbon Footprint Entry</span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+                        <form th:action="${isEdit} ? @{/footprint/edit/{id}(id=${footprint.id})} : @{/footprint/add}" 
+                              th:object="${footprint}" method="post">
+                            
+                            <!-- Date -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label">Date *</label>
+                                    <input type="date" class="form-control" th:field="*{date}" required>
+                                    <div th:if="${#fields.hasErrors('date')}" class="text-danger small" th:errors="*{date}"></div>
+                                </div>
+                            </div>
+
+                            <!-- Energy Consumption -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">
+                                    <h6 class="mb-0"><i class="fas fa-bolt me-2"></i>Energy Consumption</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="electricityUsage" class="form-label">Electricity Usage (kWh)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{electricityUsage}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('electricityUsage')}" class="text-danger small" th:errors="*{electricityUsage}"></div>
+                                            <small class="form-text text-muted">Check your electricity meter or bill</small>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="gasUsage" class="form-label">Gas Usage (m³)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{gasUsage}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('gasUsage')}" class="text-danger small" th:errors="*{gasUsage}"></div>
+                                            <small class="form-text text-muted">Natural gas consumption</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transportation -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-warning text-dark">
+                                    <h6 class="mb-0"><i class="fas fa-car me-2"></i>Transportation</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="carDistance" class="form-label">Car Distance (km)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{carDistance}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('carDistance')}" class="text-danger small" th:errors="*{carDistance}"></div>
+                                            <small class="form-text text-muted">Personal vehicle travel</small>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="publicTransportDistance" class="form-label">Public Transport (km)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{publicTransportDistance}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('publicTransportDistance')}" class="text-danger small" th:errors="*{publicTransportDistance}"></div>
+                                            <small class="form-text text-muted">Bus, train, subway, etc.</small>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="flightDistance" class="form-label">Flight Distance (km)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{flightDistance}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('flightDistance')}" class="text-danger small" th:errors="*{flightDistance}"></div>
+                                            <small class="form-text text-muted">Air travel distance</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Waste Management -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-secondary text-white">
+                                    <h6 class="mb-0"><i class="fas fa-trash me-2"></i>Waste Management</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="wasteProduced" class="form-label">Waste Produced (kg)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{wasteProduced}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('wasteProduced')}" class="text-danger small" th:errors="*{wasteProduced}"></div>
+                                            <small class="form-text text-muted">Total waste generated</small>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="recyclingAmount" class="form-label">Recycling Amount (kg)</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{recyclingAmount}" placeholder="0.00">
+                                            <div th:if="${#fields.hasErrors('recyclingAmount')}" class="text-danger small" th:errors="*{recyclingAmount}"></div>
+                                            <small class="form-text text-muted">Amount recycled or composted</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success me-2">
+                                        <i class="fas fa-save me-2"></i>
+                                        <span th:text="${isEdit} ? 'Update Entry' : 'Save Entry'">Save Entry</span>
+                                    </button>
+                                    <a href="/footprint" class="btn btn-secondary">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tips Card -->
+                <div class="card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Tips for Accurate Tracking</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i>Check your utility bills for exact usage</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Use trip planning apps to estimate distances</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Keep receipts from fuel purchases</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i>Weigh your garbage bags for accuracy</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Include all household members' activities</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Track daily for better habit formation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
