@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Carbon Footprint</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-leaf me-2"></i>Carbon Tracker
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link active" href="/footprint">Carbon Footprint</a>
+                <a class="nav-link" href="/goals">Goals</a>
+                <a class="nav-link" href="/reports">Reports</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show">
+            <span th:text="${successMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show">
+            <span th:text="${errorMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1><i class="fas fa-leaf text-success me-2"></i>Entry Details</h1>
+            <div>
+                <a th:href="@{/footprint/edit/{id}(id=${footprint.id})}" class="btn btn-warning me-2">
+                    <i class="fas fa-edit me-1"></i>Edit
+                </a>
+                <form th:action="@{/footprint/delete/{id}(id=${footprint.id})}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this entry?');">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>Delete
+                    </button>
+                </form>
+                <a href="/footprint" class="btn btn-secondary ms-2">Back to List</a>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-muted">Date</h5>
+                        <p th:text="${#temporals.format(footprint.date, 'MMMM dd, yyyy')}"></p>
+
+                        <h5 class="text-muted">Electricity (kWh)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.electricityUsage, 1, 2)}"></p>
+
+                        <h5 class="text-muted">Gas (m³)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.gasUsage, 1, 2)}"></p>
+
+                        <h5 class="text-muted">Car (km)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.carDistance, 1, 2)}"></p>
+
+                        <h5 class="text-muted">Public Transport (km)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.publicTransportDistance, 1, 2)}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="text-muted">Flights (km)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.flightDistance, 1, 2)}"></p>
+
+                        <h5 class="text-muted">Waste (kg)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.wasteProduced, 1, 2)}"></p>
+
+                        <h5 class="text-muted">Recycling (kg)</h5>
+                        <p th:text="${#numbers.formatDecimal(footprint.recyclingAmount, 1, 2)}"></p>
+
+                        <h5 class="text-muted">Total Emissions</h5>
+                        <p><span class="badge bg-primary" th:text="${#numbers.formatDecimal(footprint.totalEmissions, 1, 2)} + ' kg CO₂'"></span></p>
+
+                        <h6 class="text-muted">Recorded At</h6>
+                        <p th:text="${#temporals.format(footprint.createdAt, 'MMMM dd, yyyy HH:mm')}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Recommendations</h4>
+                <p class="text-muted">Personalized suggestions to reduce your footprint for this entry.</p>
+
+                <ul class="list-group" th:if="${!#lists.isEmpty(recommendations)}">
+                    <li class="list-group-item" th:each="rec : ${recommendations}" th:text="${rec}"></li>
+                </ul>
+
+                <div th:if="${#lists.isEmpty(recommendations)}" class="text-muted">
+                    <em>No recommendations available for this entry.</em>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

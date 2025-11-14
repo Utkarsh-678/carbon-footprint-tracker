@@ -21,7 +21,8 @@ import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "reduction_goals")
-public class ReductionGoal {
+public class ReductionGoal
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
